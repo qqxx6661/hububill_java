@@ -8,7 +8,7 @@ import javax.swing.*;
 
 
 public class GUIUtil {
-    private static String imageFolder = "/img";// 看是否能运行
+    private static String imageFolder = "C:/Users/yzd/IdeaProjects/hububill_java/img";
 
     public static void setImageIcon(JButton b, String fileName, String tip) {
         ImageIcon i = new ImageIcon(new File(imageFolder, fileName).getAbsolutePath());
@@ -43,12 +43,13 @@ public class GUIUtil {
         cp.show(p);
     }
 
+
     public static void showPanel(JPanel p) {
         showPanel(p,0.85);
     }
 
     public static boolean checkNumber(JTextField tf, String input) {
-        if (!checkNumber(tf, input))
+        if (!checkEmpty(tf, input))
             return false;
         String text = tf.getText().trim();
         try {
@@ -57,13 +58,42 @@ public class GUIUtil {
         } catch (NumberFormatException e1) {
             JOptionPane.showMessageDialog(null, input + " 需要是整数");
             tf.grabFocus();
-            return  false;
+            return false;
         }
     }
 
     public static boolean checkZero(JTextField tf, String input) {
+        if(!checkNumber(tf, input))
+            return false;
+        String text = tf.getText().trim();
 
+        if (0 == Integer.parseInt(text)) {
+            JOptionPane.showMessageDialog(null, input + " 不能为0");
+            tf.grabFocus();
+            return false;
+        }
+    return true;
     }
 
+    public static boolean checkEmpty(JTextField tf, String input) {
+        String text = tf.getText().trim();
+        if (0 == text.length()) {
+            JOptionPane.showMessageDialog(null, input + " 不能为空");
+            tf.grabFocus();
+            return false;
+        }
+        return true;
+    }
 
+    public static int getInt(JTextField tf) {
+        return Integer.parseInt(tf.getText());
+    }
+
+    public static void useLNF() {
+        try {
+            javax.swing.UIManager.setLookAndFeel("com.birsoft.liquid.LiquidLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
