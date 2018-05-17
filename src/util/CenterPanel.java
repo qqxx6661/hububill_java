@@ -1,5 +1,7 @@
 package util;
 
+import gui.panel.WorkingPanel;
+
 import java.awt.Component;
 
 import  java.awt.Dimension;
@@ -47,6 +49,10 @@ public class CenterPanel extends JPanel{
             remove(c);
         }
         add(p);
+        // 有这句话，就能使得继承WorkingPanel类的Panel实现数据更新
+        if (p instanceof WorkingPanel)
+            ((WorkingPanel) p).updateData();
+
         this.updateUI();
     }
 

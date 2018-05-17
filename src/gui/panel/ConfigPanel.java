@@ -9,10 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import gui.listener.ConfigListener;
+import service.ConfigService;
 import util.ColorUtil;
 import util.GUIUtil;
 
-public class ConfigPanel extends JPanel {
+public class ConfigPanel extends WorkingPanel {
     static{
         GUIUtil.useLNF();
     }
@@ -48,6 +49,15 @@ public class ConfigPanel extends JPanel {
         addListener();
     }
 
+    @Override
+    public void updateData() {
+        String budget = new ConfigService().get(ConfigService.budget);
+        String mysqlPath = new ConfigService().get(ConfigService.mysqlPath);
+        tfBudget.setText(budget);
+        tfMysqlPath.setText(mysqlPath);
+        tfBudget.grabFocus();
+    }
+
     public void addListener() {
         ConfigListener l = new ConfigListener();
         bSubmit.addActionListener(l);
@@ -55,5 +65,4 @@ public class ConfigPanel extends JPanel {
     public static void main(String[] args) {
         GUIUtil.showPanel(ConfigPanel.instance);
     }
-
 }
