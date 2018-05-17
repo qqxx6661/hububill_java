@@ -91,7 +91,7 @@ public class GUIUtil {
 
     public static void useLNF() {
         try {
-            javax.swing.UIManager.setLookAndFeel("com.birsoft.liquid.LiquidLookAndFeel");
+            javax.swing.UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
         } catch (Exception e) {
             e.printStackTrace();
         }
